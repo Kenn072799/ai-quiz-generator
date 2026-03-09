@@ -16,12 +16,13 @@ RUN dotnet publish -c Release -o /app/out \
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app
 
-# Run as non-root user for security
-RUN adduser --disabled-password --gecos "" appuser \
-    && mkdir -p Uploads \
-    && chown -R appuser:appuser /app
+# Create non-root user
+RUN useradd --no-create-home --shell /bin/false appuser
 
 COPY --from=build /app/out .
+
+# Create uploads dir and give appuser ownership (must run after COPY)
+RUN mkdir -p Uploads && chown -R appuser:appuser /app
 
 USER appuser
 
