@@ -52,8 +52,9 @@ export default function LoginPage() {
           <h1 className="text-2xl font-bold text-gray-900">
             AI Quiz Generator
           </h1>
-          <p className="text-gray-500 text-sm mt-1">
-            Sign in to continue studying
+          <p className="text-gray-500 text-sm mt-1 text-center max-w-xs">
+            Upload your study materials and let AI generate quizzes, flashcards,
+            and summaries to help you learn faster.
           </p>
         </div>
 
