@@ -20,15 +20,15 @@ builder.Services.AddScoped<IEmailService, SmtpEmailService>();
 builder.Services.AddHttpClient("Groq");
 builder.Services.AddMemoryCache(); // for in-memory Groq response caching
 
+// Read allowed origins from config — add your Vercel URL to AllowedOrigins in appsettings
+var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>()
+    ?? ["http://localhost:5173", "http://localhost:5174"];
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins(
-                  "http://localhost:5173",
-                  "http://localhost:5174",
-                  "https://localhost:7223",
-                  "http://localhost:5196")
+        policy.WithOrigins(allowedOrigins)
               .AllowAnyHeader()
               .AllowAnyMethod();
     });

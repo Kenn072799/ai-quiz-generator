@@ -232,6 +232,47 @@ npm run dev
 
 ---
 
+## Deployment
+
+### Backend — Render (free tier)
+
+1. Push your repo to GitHub
+2. Go to [render.com](https://render.com) → **New** → **Web Service** → connect your repo
+3. Render will auto-detect the `render.yaml` and configure the service
+4. In the Render dashboard, go to **Environment** and set these secret values:
+
+| Key                                    | Value                                                         |
+| -------------------------------------- | ------------------------------------------------------------- |
+| `ConnectionStrings__DefaultConnection` | Your Neon PostgreSQL connection string                        |
+| `Jwt__Key`                             | Your random JWT secret (min 32 chars)                         |
+| `Groq__ApiKey`                         | Your Groq API key                                             |
+| `Smtp__Username`                       | Your Gmail address                                            |
+| `Smtp__Password`                       | Your Gmail App Password                                       |
+| `Smtp__FromEmail`                      | Your Gmail address                                            |
+| `App__FrontendUrl`                     | Your Vercel frontend URL (e.g. `https://your-app.vercel.app`) |
+| `AllowedOrigins__0`                    | Your Vercel frontend URL (e.g. `https://your-app.vercel.app`) |
+
+5. Deploy — your API will be available at `https://ai-quiz-generator-api.onrender.com`
+
+> **Note:** Free tier Render services spin down after 15 minutes of inactivity and take ~30s to wake up on the next request.
+
+---
+
+### Frontend — Vercel (free tier)
+
+1. Go to [vercel.com](https://vercel.com) → **New Project** → import your GitHub repo
+2. Set **Root Directory** to `frontend`
+3. Add this **Environment Variable** in the Vercel dashboard:
+
+| Key            | Value                                            |
+| -------------- | ------------------------------------------------ |
+| `VITE_API_URL` | `https://ai-quiz-generator-api.onrender.com/api` |
+
+4. Deploy — Vercel auto-detects Vite and builds it
+5. The `vercel.json` in the frontend folder handles SPA routing automatically
+
+---
+
 ## License
 
 This project is for educational purposes.
