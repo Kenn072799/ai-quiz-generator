@@ -1,0 +1,53 @@
+# ============================================================
+# BACKEND — ASP.NET Core
+# ============================================================
+
+# Build outputs
+backend/bin/
+backend/obj/
+
+# Visual Studio
+backend/.vs/
+backend/*.user
+backend/*.suo
+
+# Secrets — NEVER commit these
+backend/appsettings.Development.json
+backend/appsettings.Production.json
+
+# User-uploaded files (runtime data, not source code)
+backend/Uploads/*
+!backend/Uploads/.gitkeep
+
+# ============================================================
+# FRONTEND — React / Vite
+# ============================================================
+
+# Dependencies
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+frontend/dist-ssr/
+
+# Environment secrets — NEVER commit .env files
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# ============================================================
+# GENERAL
+# ============================================================
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Editor
+.idea/
+*.swp
+*.swo
